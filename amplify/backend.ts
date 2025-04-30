@@ -24,15 +24,15 @@ const API = new appsync.GraphqlApi(cdkStack, "appsync1", {
   // graphql schema
   definition: appsync.Definition.fromSchema(
     appsync.SchemaFile.fromAsset('schema.graphql')
-  )
-  // authorizationConfig: {
-  //   defaultAuthorization: {
-  //     authorizationType: aws_appsync.AuthorizationType.LAMBDA,
-  //     lambdaAuthorizerConfig: {
-  //       handler: amplifyBackend.auth.resources.lambda
-  //     }
-  //   }
-  // }
+  ),
+  authorizationConfig: {
+    defaultAuthorization: {
+      authorizationType: aws_appsync.AuthorizationType.LAMBDA,
+      lambdaAuthorizerConfig: {
+        handler: amplifyBackend.auth.resources.lambda
+      }
+    }
+  }
 });
 
 const datasource = API.addLambdaDataSource(
